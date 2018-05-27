@@ -7,7 +7,7 @@
 from pytest import approx 
 
 # import the code to be tested
-from pythonian import kpm, mpk, gpl, lpg
+from pythonian import kpm, mpk, gpl, lpg, mpg, kpl
 
 # write a smoke test
 def test_smoke():
@@ -45,80 +45,38 @@ def test_lpg():
   assert lpg(100) == approx(26.4172)
   assert lpg(150) == approx(39.6258)
 
+def test_mpg():
+  assert mpg(0) == 0
+  assert mpg(1) == approx(2.35221061)
+  assert mpg(50) == approx(117.610530487)
+  assert mpg(100) == approx(235.221060974)
+  assert mpg(150) == approx(352.831591461)
+
+def test_kpl():
+  assert kpl(0) == 0
+  assert kpl(1) == approx(0.425132)
+  assert kpl(50) == approx(21.25659998)
+  assert kpl(100) == approx(42.51319996)
+  assert kpl(150) == approx(63.76979994)
+
 #^^^EVERYTHING HERE UP IS GOOD!^^^
 
-#GAS EFFICIENCY OF SOME 2017 TOYOTAS
+from pythonian import car
+
 #from: https://programmingideaswithjake.wordpress.com/2016/05/07/object-literals-in-python/
 class Object:
   def __init__(self, **attributes):
     self.__dict__.update(attributes)
 
-#2017 carolla gas efficiency
-corolla = Object(
-  miles_per_gallon = 32,
-  miles_per_litter = 0,
-  kilometers_per_gallon = 0,
-  kilometers_per_litter = 0)
+#from Morgan Benton code example (email)
+corolla = car(mpg = 32)
+
+def test_corolla_has_kpl():
+  assert hasattr(corolla, "kilometers_per_litter")
+  assert corolla.kilometers_per_litter == approx(32 * 1.6093 * 0.264172, abs = 0.001)
+
+corolla = car(kpl = 13.6042)
 
 def test_corolla_has_mpg():
   assert hasattr(corolla, "miles_per_gallon")
-  assert corolla.miles_per_gallon == 32
-
-def test_corolla_has_mpl():
-  assert hasattr(corolla, "miles_per_litter")
-  assert corolla.miles_per_litter == 0
-
-def test_colorlla_has_kpg():
-  assert hasattr(corolla, "kilometers_per_gallon")
-  assert corolla.kilometers_per_gallon == 0
-
-def test_colorlla_has_kpl():
-  assert hasattr(corolla, "kilometers_per_litter")
-  assert corolla.kilometers_per_litter == 0
-
-#2017 camry gas efficiency
-camry = Object(
-  miles_per_gallon = 25,
-  miles_per_litter = 0,
-  kilometers_per_gallon = 0,
-  kilometers_per_litter = 0)
-
-def test_camry_has_mpg():
-  assert hasattr(camry, "miles_per_gallon")
-  assert camry.miles_per_gallon == 25
-
-def test_camry_has_mpl():
-  assert hasattr(camry, "miles_per_litter")
-  assert camry.miles_per_litter == 0
-
-def test_camry_has_kpg():
-  assert hasattr(camry, "kilometers_per_gallon")
-  assert camry.kilometers_per_gallon == 0
-
-def test_camry_has_kpl():
-  assert hasattr(camry, "kilometers_per_litter")
-  assert camry.kilometers_per_litter == 0
-
-#2017 tacoma gas efficiency
-tacoma = Object(
-  miles_per_gallon = 19,
-  miles_per_litter = 0,
-  kilometers_per_gallon = 0,
-  kilometers_per_litter = 0)
-
-def test_tacoma_has_mpg():
-  assert hasattr(tacoma, "miles_per_gallon")
-  assert tacoma.miles_per_gallon == 19
-
-def test_tacoma_has_mpl():
-  assert hasattr(tacoma, "miles_per_litter")
-  assert tacoma.miles_per_litter == 0
-
-def test_tacoma_has_kpg():
-  assert hasattr(tacoma, "kilometers_per_gallon")
-  assert tacoma.kilometers_per_gallon == 0
-
-def test_tacoma_has_kpl():
-  assert hasattr(tacoma, "kilometers_per_litter")
-  assert tacoma.kilometers_per_litter == 0
-
+  assert corolla.miles_per_gallon == approx(13.6042 / 1.6093 / 0.264172, abs = 0.001)
