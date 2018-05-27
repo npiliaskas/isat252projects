@@ -75,8 +75,10 @@ def test_corolla_has_kpl():
   assert hasattr(corolla, "kilometers_per_litter")
   assert corolla.kilometers_per_litter == approx(32 * 1.6093 * 0.264172, abs = 0.001)
 
-corolla = car(kpl = 13.6042)
+corolla = car(kpl = 13.604224)
 
 def test_corolla_has_mpg():
   assert hasattr(corolla, "miles_per_gallon")
-  assert corolla.miles_per_gallon == approx(13.6042 / 1.6093 / 0.264172, abs = 0.001)
+  assert corolla.miles_per_gallon == approx(13.604224 / 1.6093 / 0.264172, abs = 0.001)
+
+ 
