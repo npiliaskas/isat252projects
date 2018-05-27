@@ -19,19 +19,27 @@ def gpl(g):
 def lpg(l):
   return l * 0.264172
 
-#compute gas usage (gallons) per miles and kilometers 
-def __init__(self, mpg = "", kpg = ""):
-    self.miles_per_gallon = mpg
-    self.kilometers_per_gallon = kpg
+def mpg(kpl):
+  return kpl / 1.6093 / 0.264172
 
-#compute gas usage (litters) per miles and kilometers
-def __init__(self, mpl = "", kpl = ""):
-    self.miles_per_litter = mpl
+def kpl(mpg):
+  return mpg * 1.6093 * 0.264172
+
+#from Morgan Benton code example (email)
+#create car class
+class car: 
+
+  def __init__(self, mpg = "", kpl = ""):
+    self.miles_per_gallon = mpg
     self.kilometers_per_litter = kpl
 
-#compute gallons per litters and visa versa
-def __init__(self, gpl = "", lpg = ""):
-    self.gallons_per_litters = gpl
-    self.litters_per_gallon = lpg
+    if mpg is None and kpl is None:
+      print("input a mileage value")
+    elif mpg is None:
+      def mpg(kpl):
+        return kpl / 1.6093 / 0.264172
+    elif kpl is None:
+      def kpl(mpg):
+        return mpg * 1.6093 * 0.264172
 
-#^^^EVERYTHING HERE UP IS GOOD!^^^   
+
