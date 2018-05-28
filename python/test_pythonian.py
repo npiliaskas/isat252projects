@@ -7,7 +7,7 @@
 from pytest import approx 
 
 # import the code to be tested
-from pythonian import kpm, mpk, gpl, lpg, mpg, kpl
+from pythonian import kpm, mpk, gpl, lpg
 
 # write a smoke test
 def test_smoke():
@@ -45,21 +45,6 @@ def test_lpg():
   assert lpg(100) == approx(26.4172)
   assert lpg(150) == approx(39.6258)
 
-def test_mpg():
-  assert mpg(0) == 0
-  assert mpg(1) == approx(2.35221061)
-  assert mpg(50) == approx(117.610530487)
-  assert mpg(100) == approx(235.221060974)
-  assert mpg(150) == approx(352.831591461)
-
-def test_kpl():
-  assert kpl(0) == 0
-  assert kpl(1) == approx(0.425132)
-  assert kpl(50) == approx(21.25659998)
-  assert kpl(100) == approx(42.51319996)
-  assert kpl(150) == approx(63.76979994)
-
-#^^^EVERYTHING HERE UP IS GOOD!^^^
 
 from pythonian import car
 
@@ -69,16 +54,19 @@ class Object:
     self.__dict__.update(attributes)
 
 #from Morgan Benton code example (email)
+#test car mileage conversion 
 corolla = car(mpg = 32)
 
 def test_corolla_has_kpl():
-  assert hasattr(corolla, "kilometers_per_litter")
-  assert corolla.kilometers_per_litter == approx(32 * 1.6093 * 0.264172, abs = 0.001)
+  assert hasattr(corolla, "kpl")
+  assert corolla.kpl == approx(32 * 0.264172 * 1.6093, abs = 0.001)
+  assert hasattr(corolla, "mpg")
+  assert corolla.mpg == approx(32, abs = 0.001)
 
-corolla = car(kpl = 13.604224)
+corolla = car(kpl = 13.6042)
 
 def test_corolla_has_mpg():
-  assert hasattr(corolla, "miles_per_gallon")
-  assert corolla.miles_per_gallon == approx(13.604224 / 1.6093 / 0.264172, abs = 0.001)
-
- 
+  assert hasattr(corolla, "mpg")
+  assert corolla.mpg == approx(13.6042 / 0.264172 / 1.6093, abs = 0.001)
+  assert hasattr(corolla, "kpl")
+  assert corolla.kpl == 13.6042
