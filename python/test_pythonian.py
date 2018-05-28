@@ -54,7 +54,7 @@ class Object:
     self.__dict__.update(attributes)
 
 #from Morgan Benton code example (email)
-#test car mileage conversion 
+#test various (2017 toyota) car mileage conversions 
 corolla = car(mpg = 32)
 
 def test_corolla_has_kpl():
@@ -70,3 +70,19 @@ def test_corolla_has_mpg():
   assert corolla.mpg == approx(13.6042 / 0.264172 / 1.6093, abs = 0.001)
   assert hasattr(corolla, "kpl")
   assert corolla.kpl == 13.6042
+
+tacoma = car(mpg = 21.5)
+
+def test_tacoma_has_kpl():
+  assert hasattr(tacoma, "kpl")
+  assert tacoma.kpl == approx(21.5 * 0.264172 * 1.6093, abs = 0.001)
+  assert hasattr(tacoma, "mpg")
+  assert tacoma.mpg == approx(21.5, abs = 0.001)
+
+camry = car(kpl = 11.77648)
+
+def test_camry_has_mpg():
+  assert hasattr(camry, "mpg")
+  assert camry.mpg == approx(11.77648 / 0.264172 / 1.6093, abs = 0.001)
+  assert hasattr(camry, "kpl")
+  assert camry.kpl == 11.77648
