@@ -7,9 +7,8 @@
 def kpm(m):
   return m * 1.6093
 
-#convert miles to kilometers
-def mpk(k):
-  return k / 1.6093  
+#convert miles to kilometers 
+mpk = lambda k : k / 1.6093
 
 #convert gallons to litters 
 def gpl(g):
